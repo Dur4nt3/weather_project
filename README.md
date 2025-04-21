@@ -1,37 +1,25 @@
-# Front-End Template Repository
+# Weather App Project
 
-This a template repository for front-end development.
+### Todo List | The Odin Project | JavaScript
 
-**This template uses the following web technologies: HTML, CSS, JavaScript, Webpack, ESLint, Prettier.**
+This is the fifth project of the "JavaScript" course within "The Odin Project".
 
-*Note: various configurations are opinionated and/or project-specific and may or may not need to be edited to fit your specific needs.*
+The main goal of this project is to build a forecast application that lets you view the weather in specified locations.
+*The API used for this application is Visual Crossing's "Weather API".*
+*Learn more about Visual Crossing [here](https://www.visualcrossing.com/weather-api/).*
 
-Included in the repository:
+This app is used to practice asynchronous programming, specifically using "Promises", "async/await", and in general working with APIs.
 
-- A "README.md" file
+*Note: the API key is stored in `secret.json` which is not committed; although this isn't completely secure as this is a front-end project without a backend server to hide the key behind, it provides some level of obfuscation.*
 
-- A ".gitignore" file with the "Node" preset
+*If you are cloning this project and wish to replicate the structure of `secret.json` you can use the following template:*
 
-- "package.json" and "package-lock.json" for the npm packages used in this repository
+```
+{
+    "key": "${API Key}"
+}
+```
 
-- webpack with various plugins
+**Skills demonstrated: Promises, async/await, APIs**
 
-- 3 webpack configuration files: "webpack.common.js", "webpack.dev.js" and, "webpack.prod.js"
-
-- A "src" directory and various related subdirectories
-
-- An "index.js" file (under "./src")
-
-- An "index.html" file (under "./src")
-
-- A "styles.css" file (under "./src") with a pre-defined font-stack
-
-- A CSS reset under "./src/assets/stylesheets"
-
-- A "fonts.css" file under "./src/assets/stylesheets"
-
-- ESLint with a configuration inspired by AirBnB's style guide (@stylistic is commented-out due to conflicts with Prettier)
-
-- Prettier configured to not conflict with ESLint
-
-- A ".prettierignore" file to ensure to ignore various files that shouldn't be formatted
+**Webpage responsiveness: THIS PROJECT WILL NOT DISPLAY PROPERLY ON MOBILE DEVICES**
