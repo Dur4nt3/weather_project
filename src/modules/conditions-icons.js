@@ -1,6 +1,5 @@
 import snowSvg from '../assets/images/weather/snow.svg';
 import snowShowersDaySvg from '../assets/images/weather/snow-showers-day.svg';
-// eslint-disable-next-line @stylistic/max-len
 import snowShowersNightSvg from '../assets/images/weather/snow-showers-at-night.svg';
 import thunderSvg from '../assets/images/weather/thunderstorm.svg';
 import rainSvg from '../assets/images/weather/rain.svg';
@@ -24,6 +23,8 @@ import waningGibbousSvg from '../assets/images/moon/waning-gibbous.svg';
 import lastQuarterSvg from '../assets/images/moon/last-quarter.svg';
 import waningCrescentSvg from '../assets/images/moon/waning-crescent.svg';
 import defaultMoonSvg from '../assets/images/moon/moon-default.svg';
+
+// This module associates condition names and moon phase values to their respective SVG icons
 
 const conditionsIconsSources = {
     snow: snowSvg,
@@ -55,7 +56,7 @@ const moonPhases = {
     lastQuarter: lastQuarterSvg,
     waningCrescent: waningCrescentSvg,
     defaultMoon: defaultMoonSvg,
-}
+};
 
 export function getWeatherConditionIcon(condition) {
     if (conditionsIconsSources[condition] !== undefined) {
@@ -67,36 +68,35 @@ export function getWeatherConditionIcon(condition) {
 export function getMoonPhaseIcon(moonPhase) {
     if (moonPhase === 0) {
         return moonPhases.newMoon;
-    } 
+    }
 
     if (moonPhase > 0 && moonPhase < 0.25) {
-        return  moonPhases.waxingCrescent;
-    } 
+        return moonPhases.waxingCrescent;
+    }
 
     if (moonPhase === 0.25) {
-        return  moonPhases.firstQuarter;
+        return moonPhases.firstQuarter;
     }
 
     if (moonPhase > 0.25 && moonPhase < 0.5) {
-        return  moonPhases.waxingGibbous;
+        return moonPhases.waxingGibbous;
     }
 
     if (moonPhase === 0.5) {
-        return  moonPhases.fullMoon;
+        return moonPhases.fullMoon;
     }
 
     if (moonPhase > 0.5 && moonPhase < 0.75) {
-        return  moonPhases.waningGibbous;
+        return moonPhases.waningGibbous;
     }
 
     if (moonPhase === 0.75) {
-        return  moonPhases.lastQuarter;
+        return moonPhases.lastQuarter;
     }
 
     if (moonPhase > 0.75 && moonPhase <= 1) {
-        return  moonPhases.waningCrescent;
+        return moonPhases.waningCrescent;
     }
 
     return moonPhases.defaultMoon;
 }
-

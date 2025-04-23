@@ -3,6 +3,8 @@ import { getTimePeriod } from './misc-utilities';
 import sunSvg from '../assets/icons/sun.svg';
 import moonSvg from '../assets/icons/moon.svg';
 
+// This module checks the user's local time every minute and changes the theme depending on it
+
 const bodyTag = document.querySelector('body');
 
 function changeToDay() {
@@ -26,8 +28,7 @@ function getTheme() {
     return changeToNight;
 }
 
-// Used to prevent adding a dependency to 'no-data-notice.js'
-// For only changing an image's src attribute
+// Used to prevent adding a dependency to 'no-data-notice.js' for only changing an image's src attribute
 function changeNoticeSvg() {
     const noDataNotice = document.querySelector('.no-data-notice');
     if (noDataNotice === null) {

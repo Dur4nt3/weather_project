@@ -1,4 +1,3 @@
-// eslint-disable-next-line @stylistic/max-len
 // A collection of useful functions that can be used to manipulate (alter) the DOM
 
 // Add the class 'hide' which is set to 'display: none'
@@ -36,6 +35,20 @@ export function buildImgElement(src, alt, ...classNames) {
     return imgElement;
 }
 
+// Builds a toggle switch input
+// This function is highly dependent on styles
+// Furthermore, it is imperative that the classes used in this function match the ones used in the stylesheets
+export function buildToggleSwitchInput(inputClass, inputID) {
+    const label = buildElement('label', 'toggle-switch-label');
+    const input = buildElement('input', 'toggle-switch-input', inputClass);
+    input.id = inputID;
+    input.type = 'checkbox';
+    const span = buildElement('span', 'toggle-switch-slider');
+
+    label.append(input, span);
+    return label;
+}
+
 // Remove all children of an element
 // Might need to change max depth to ensure all children are removed
 export function clearChildren(element) {
@@ -44,7 +57,7 @@ export function clearChildren(element) {
     let count = 0;
     while (element.lastChild !== null && count < maxDepth) {
         element.lastChild.remove();
-        count+=1;
+        count += 1;
     }
 
     if (count === maxDepth) {

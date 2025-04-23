@@ -12,6 +12,8 @@ import moonSvg from '../assets/icons/moon.svg';
 import menuSvg from '../assets/icons/menu.svg';
 import plusSvg from '../assets/icons/plus.svg';
 
+// This module builds the no data notice that displays if a user hasn't tracked any locations yet
+
 function buildNoDataNotice() {
     const noDataNotice = buildElement('div', 'no-data-notice');
 
@@ -50,7 +52,7 @@ function buildNoDataNotice() {
     noticeText2.append(
         'Select the ',
         menuImg,
-        ' Icon on the top-left corner to open the menu, then select ',
+        ' icon on the top-left corner to open the menu, then select ',
         plusImg,
         ' to add a new location.'
     );
@@ -73,4 +75,14 @@ export default function applyNoDataNotice() {
     clearChildren(mainDataCont);
 
     mainDataCont.appendChild(buildNoDataNotice());
+}
+
+// Used to remove the no data notice
+// Can be used even if the notice was already removed
+export function removeNoDataNotice() {
+    const noticeCont = document.querySelector('.no-data-notice');
+    if (noticeCont === null) {
+        return;
+    }
+    noticeCont.remove();
 }

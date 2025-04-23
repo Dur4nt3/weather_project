@@ -2,6 +2,7 @@ import './assets/stylesheets/reset.css';
 import './styles.css';
 
 import { initialLoad } from './modules/initial-load';
+import { addLocationModalInteractivity } from './modules/add-location-modal-interactivity';
 
 window.onload = initialLoad;
 
@@ -10,4 +11,17 @@ const menuOptions = document.querySelector('.menu-icons-cont');
 
 dropdownIcon.addEventListener('click', () => {
     menuOptions.classList.toggle('expanded');
+});
+
+menuOptions.addEventListener('click', (e) => {
+    // Don't continue if the menu isn't expanded
+    if (!menuOptions.classList.contains('expanded')) {
+        return;
+    }
+
+    const { target } = e;
+
+    if (target.classList.contains('add-icon')) {
+        addLocationModalInteractivity();
+    }
 });
