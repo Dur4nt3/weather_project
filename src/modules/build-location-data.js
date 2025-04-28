@@ -17,6 +17,7 @@ function buildHeaderSection(weatherDataObj) {
         weatherDataObj.location,
         'location-name'
     );
+    title.dataset.location = weatherDataObj.location;
 
     const utilities = buildElement('div', 'utilities-cont');
 

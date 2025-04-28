@@ -1,7 +1,7 @@
 import { adjustToLocalTime, padTimeWithZeros } from './misc-utilities';
 import { getHours, isSameDay } from 'date-fns';
 
-// This module includes various utilities for weather data
+// This module includes various utilities for handling and manipulating weather data
 
 const savedLocations = {};
 const latestUpdates = {};
