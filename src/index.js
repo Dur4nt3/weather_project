@@ -3,6 +3,7 @@ import './styles.css';
 
 import { initialLoad } from './modules/initial-load';
 import { addLocationModalInteractivity } from './modules/add-location-modal-interactivity';
+import { toggleMenuTip } from './modules/add-tooltips';
 
 window.onload = initialLoad;
 
@@ -11,6 +12,7 @@ const menuOptions = document.querySelector('.menu-icons-cont');
 
 dropdownIcon.addEventListener('click', () => {
     menuOptions.classList.toggle('expanded');
+    toggleMenuTip();
 });
 
 menuOptions.addEventListener('click', (e) => {

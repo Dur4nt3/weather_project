@@ -80,6 +80,15 @@ body.night {
     background-color: var(--secondary-darker);
 }
 
+.tippy-box[data-theme~='weatherApp'] {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    background-color: var(--background-color);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
 /* General Styles */
 
 /*-----------------------------------------------------*/
@@ -142,7 +151,7 @@ body.night {
     );
 }
 
-.menu-icon-wrapper {
+/* .menu-icon-wrapper {
     position: relative;
 }
 
@@ -168,42 +177,7 @@ body.night {
 
 .menu-icon-wrapper:hover:before {
     opacity: 1;
-}
-
-.dropdown-cont:before {
-    content: '';
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    padding: 0.25rem;
-    background-color: var(--background-color);
-    white-space: nowrap;
-    position: absolute;
-    left: 250%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    opacity: 0;
-}
-
-.dropdown-cont:has(.add-icon:hover):before {
-    content: 'Add Location';
-    opacity: 1;
-}
-
-.dropdown-cont:has(.edit-icons:hover):before {
-    content: 'Toggle Edit';
-    opacity: 1;
-}
-
-.dropdown-cont:has(.unit-icons:hover > .fahrenheit-icon.hide):before {
-    content: 'Metric Units';
-    opacity: 1;
-}
-
-.dropdown-cont:has(.unit-icons:hover > .celsius-icon.hide):before {
-    content: 'Imperial Units';
-    opacity: 1;
-}
+} */
 
 /* Dropdown Styles */
 
