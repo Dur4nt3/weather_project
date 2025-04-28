@@ -1,4 +1,4 @@
-import { adjustToLocalTime } from './misc-utilities';
+import { adjustToLocalTime, padTimeWithZeros } from './misc-utilities';
 import { getHours, isSameDay } from 'date-fns';
 
 // This module includes various utilities for weather data
@@ -70,7 +70,8 @@ export function updateLatestUpdates(location, tzOffset) {
 
 // Returns weather data for the highlight (i.e., the current hour)
 export function getHighlightData(weatherDataObj) {
-    const time = `${getHours(new Date(adjustToLocalTime(weatherDataObj.tzOffset)))}:00:00`;
+    let time = padTimeWithZeros(`${getHours(new Date(adjustToLocalTime(weatherDataObj.tzOffset)))}:00`);
+    time = `${time}:00`;
 
     for (const key in weatherDataObj.hourlyTemps) {
         if (key === time) {

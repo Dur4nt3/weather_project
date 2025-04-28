@@ -112,7 +112,6 @@ async function addLocationModalEvent(event) {
             indicateError(modalContent.parentNode);
             return;
         }
-        console.log('preparing to exit');
         setTimeout(() => {
             exitModal(
                 modalContent.parentNode,

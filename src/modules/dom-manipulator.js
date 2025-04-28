@@ -38,10 +38,13 @@ export function buildImgElement(src, alt, ...classNames) {
 // Builds a toggle switch input
 // This function is highly dependent on styles
 // Furthermore, it is imperative that the classes used in this function match the ones used in the stylesheets
-export function buildToggleSwitchInput(inputClass, inputID) {
+export function buildToggleSwitchInput(inputClass, inputID = '') {
     const label = buildElement('label', 'toggle-switch-label');
     const input = buildElement('input', 'toggle-switch-input', inputClass);
-    input.id = inputID;
+    if (inputID !== '') {
+        input.id = inputID;
+        label.htmlFor = inputID;
+    }
     input.type = 'checkbox';
     const span = buildElement('span', 'toggle-switch-slider');
 

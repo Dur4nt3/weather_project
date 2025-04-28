@@ -1,4 +1,5 @@
 import { WeatherData, savedLocations } from './data-utilities';
+import { saveToLocalStorage } from './localStorage-save';
 
 // This module formats the weather data so it can be safely inserted to 'savedLocations'
 
@@ -34,5 +35,6 @@ export default function formatAndSaveWeatherData(jsonData) {
     );
 
     savedLocations[jsonData.resolvedAddress] = weatherDataObject;
+    saveToLocalStorage(weatherDataObject);
     return weatherDataObject;
 }

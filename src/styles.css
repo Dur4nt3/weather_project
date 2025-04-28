@@ -21,7 +21,7 @@
     --secondary-glass-background: rgba(38, 94, 192, 0.65);
     --secondary-glass-border: 1px solid rgba(38, 94, 192, 0.325);
 
-    --glass-shadow: 0 1px 7px 1px rgba(16, 45, 94, 0.75);
+    --glass-shadow: 0 1px 8px 0.5px rgba(16, 45, 94, 0.75);
 
     --primary-border: #fbfbfe;
     --secondary-border: #0e114a;

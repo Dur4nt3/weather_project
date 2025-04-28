@@ -7,28 +7,26 @@ import {
 
 import { getWeatherConditionIcon } from './conditions-icons';
 import { updateLatestUpdates, getHighlightData } from './data-utilities';
-import { adjustToLocalTime, getTimeFormatted } from './misc-utilities';
+import { adjustToLocalTime, formatDateUI } from './misc-utilities';
 
 // This module builds the markup of a location data container based on data given as an argument
 
 function buildHeaderSection(weatherDataObj) {
     const title = buildElementWithText(
-        'h3',
+        'h2',
         weatherDataObj.location,
         'location-name'
     );
+
     const utilities = buildElement('div', 'utilities-cont');
 
     const localTime = buildElement('div', 'local-time-cont');
-    localTime.append(
-        'Local Time: ',
-        getTimeFormatted(adjustToLocalTime(weatherDataObj.tzOffset))
-    );
+    localTime.append(formatDateUI(adjustToLocalTime(weatherDataObj.tzOffset)));
 
     const changeUnits = buildElement('div', 'change-units-cont');
     const spanC = buildElementWithText('span', 'C°', 'c-label');
     const spanF = buildElementWithText('span', 'F°', 'f-label');
-    const toggleSwitch = buildToggleSwitchInput('toggle-units', 'toggle-unit');
+    const toggleSwitch = buildToggleSwitchInput('toggle-units');
     changeUnits.append(spanC, toggleSwitch, spanF);
 
     utilities.append(localTime, changeUnits);
