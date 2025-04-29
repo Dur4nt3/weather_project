@@ -4,6 +4,7 @@ import './styles.css';
 import { initialLoad } from './modules/initial-load';
 import { addLocationModalInteractivity } from './modules/add-location-modal-interactivity';
 import { toggleMenuTip } from './modules/add-tooltips';
+import handleGlobalChangeUnits from './modules/global-change-units';
 
 window.onload = initialLoad;
 
@@ -25,5 +26,16 @@ menuOptions.addEventListener('click', (e) => {
 
     if (target.classList.contains('add-icon')) {
         addLocationModalInteractivity();
+        return;
+    }
+
+    if (target.classList.contains('fahrenheit-icon')) {
+        handleGlobalChangeUnits(target, true);
+        return;
+    }
+
+    if (target.classList.contains('celsius-icon')) {
+        handleGlobalChangeUnits(target, false);
+        return;
     }
 });

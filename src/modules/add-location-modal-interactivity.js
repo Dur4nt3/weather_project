@@ -4,11 +4,11 @@ import {
     displayResults,
     indicateError,
     clearQueryResults,
-    indicateSuccess,
 } from './add-location-modal';
 import { fetchWeatherData } from './fetch-weather-data';
 import trackNewLocation from './track-new-location';
 import { exitModal } from './misc-utilities';
+import { addSuccessNotification } from './add-notification';
 
 // Tracks the results of the latest query (error/success)
 let queryResult;
@@ -59,7 +59,9 @@ function handleFinalDecision(modal, decision) {
     }
 
     // Show success within the modal
-    indicateSuccess(modal.lastChild, queryResult.resolvedAddress);
+    addSuccessNotification(
+        `Added ${queryResult.resolvedAddress}.`
+    );
     trackNewLocation(queryResult);
     return true;
 }
@@ -112,14 +114,12 @@ async function addLocationModalEvent(event) {
             indicateError(modalContent.parentNode);
             return;
         }
-        setTimeout(() => {
-            exitModal(
-                modalContent.parentNode,
-                'close-modal-animation',
-                modalContent,
-                300
-            );
-        }, 1500);
+        exitModal(
+            modalContent.parentNode,
+            'close-modal-animation',
+            modalContent,
+            300
+        );
         return;
     }
 

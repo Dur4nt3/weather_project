@@ -11,7 +11,6 @@ import { adjustToLocalTime, formatDateUI } from './misc-utilities-dates';
 // It uses 'update-data-check.js' to know whether an update is need or not and what needs to be updated
 
 export default function performDataUpdates() {
-    console.log('executing updates');
     for (const location in savedLocations) {
         const updateRequirements = checkForDataUpdates(
             savedLocations[location]

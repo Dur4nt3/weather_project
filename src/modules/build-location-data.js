@@ -6,8 +6,21 @@ import {
 } from './dom-manipulator';
 
 import { getWeatherConditionIcon } from './conditions-icons';
-import { updateLatestUpdates, getHighlightData } from './data-utilities';
-import { adjustToLocalTime, formatDateUI } from './misc-utilities';
+import {
+    updateLatestUpdates,
+    getHighlightData,
+    savedLocations,
+} from './data-utilities';
+import {
+    adjustToLocalTime,
+    formatDateUI,
+    toFahrenheit,
+} from './misc-utilities';
+import {
+    locateLocationDataCont,
+    adjustDataContShell,
+} from './ui-data-utilities';
+import { addErrorNotification } from './add-notification';
 
 // This module builds the markup of a location data container based on data given as an argument
 
@@ -28,13 +41,14 @@ function buildHeaderSection(weatherDataObj) {
     const spanC = buildElementWithText('span', 'C°', 'c-label');
     const spanF = buildElementWithText('span', 'F°', 'f-label');
     const toggleSwitch = buildToggleSwitchInput('toggle-units');
+
     changeUnits.append(spanC, toggleSwitch, spanF);
 
     utilities.append(localTime, changeUnits);
     return [title, utilities];
 }
 
-function highlightSection(weatherDataObj) {
+function highlightSection(weatherDataObj, inF = false) {
     const highlightCont = buildElement('div', 'location-hourly-highlight');
 
     const highlightData = getHighlightData(weatherDataObj);
@@ -44,10 +58,14 @@ function highlightSection(weatherDataObj) {
         'Current',
         'highlight-time'
     );
-    // To add => adjust temperatures to units according to user selection
+
+    const temp = inF
+        ? toFahrenheit(Number(highlightData.temperature))
+        : highlightData.temperature;
+
     const highlightTemp = buildElementWithText(
         'p',
-        `${highlightData.temperature}°`,
+        `${temp}°`,
         'highlight-temp'
     );
     const highlightConditions = buildElementWithText(
@@ -71,7 +89,7 @@ function highlightSection(weatherDataObj) {
     return highlightCont;
 }
 
-function hourlyDataCont(hourlyData) {
+function hourlyDataCont(hourlyData, inF = false) {
     const hourlyCont = buildElement('div', 'hourly-data-cont');
 
     let { time } = hourlyData;
@@ -88,11 +106,11 @@ function hourlyDataCont(hourlyData) {
         'hourly-condition-img'
     );
 
-    const hourlyTemp = buildElementWithText(
-        'p',
-        `${hourlyData.temperature}°`,
-        'hourly-temp'
-    );
+    const temp = inF
+        ? toFahrenheit(Number(hourlyData.temperature))
+        : hourlyData.temperature;
+
+    const hourlyTemp = buildElementWithText('p', `${temp}°`, 'hourly-temp');
 
     const hourlyConditions = buildElementWithText(
         'p',
@@ -105,12 +123,39 @@ function hourlyDataCont(hourlyData) {
     return hourlyCont;
 }
 
-function restOfDaySection(weatherDataObj) {
+function restOfDaySection(weatherDataObj, inF = false) {
     const restOfDay = buildElement('div', 'location-rest-of-day');
     for (const hour in weatherDataObj.hourlyTemps) {
-        restOfDay.append(hourlyDataCont(weatherDataObj.hourlyTemps[hour]));
+        restOfDay.append(hourlyDataCont(weatherDataObj.hourlyTemps[hour], inF));
     }
     return restOfDay;
+}
+
+// Returns the highlight section and rest of day section in the selected units
+export function locationDataShell(weatherDataObj, inF = false) {
+    return {
+        highlight: highlightSection(weatherDataObj, inF),
+        restOfDay: restOfDaySection(weatherDataObj, inF),
+    };
+}
+
+export function changeUnitsEvent(event) {
+    const { target } = event;
+    const dataCont = locateLocationDataCont(target);
+    const weatherDataObj =
+        savedLocations[
+            dataCont.querySelector('.location-name').dataset.location
+        ];
+    if (dataCont === null || weatherDataObj === undefined) {
+        addErrorNotification('Failed to change units of measurement!');
+        return;
+    }
+
+    if (target.checked) {
+        adjustDataContShell(dataCont, locationDataShell(weatherDataObj, true));
+    } else {
+        adjustDataContShell(dataCont, locationDataShell(weatherDataObj, false));
+    }
 }
 
 export function locationDataCont(weatherDataObj) {
@@ -131,4 +176,8 @@ export function locationDataCont(weatherDataObj) {
     updateLatestUpdates(weatherDataObj.location, weatherDataObj.tzOffset);
 
     document.querySelector('.main-data').append(dataCont);
+
+    dataCont
+        .querySelector('.toggle-switch-input')
+        .addEventListener('input', changeUnitsEvent);
 }

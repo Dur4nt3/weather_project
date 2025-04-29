@@ -52,7 +52,7 @@ function buildNoDataNotice() {
     noticeText2.append(
         'Select the ',
         menuImg,
-        ' icon on the top-left corner to open the menu, then select ',
+        ' icon in the top-left corner to open the menu, then select ',
         plusImg,
         ' to add a new location.'
     );

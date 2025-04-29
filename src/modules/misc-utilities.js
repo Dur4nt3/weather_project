@@ -36,3 +36,7 @@ export function exitModal(
         console.error(`Error when exiting modal: ${error}`);
     }
 }
+
+export function toFahrenheit(tempInC) {
+    return ((tempInC * (9 / 5)) + 32).toFixed(1);
+}

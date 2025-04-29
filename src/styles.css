@@ -29,7 +29,14 @@
     --submit-green: #00e461;
     --error-red: #ffbb00;
     --error-background: #e72e00;
-    
+
+    --error-glass-background: rgba(231, 46, 0, 0.925);
+    --error-glass-border: 1px solid rgba(231, 46, 0, 0.35);
+
+    --success-glass-background: rgba(0,204,25,0.925);
+
+    --information-glass-background: rgba(0,83,204,0.925);
+
     --dropdown-icons-count: 3;
 }
 
@@ -40,10 +47,10 @@
     --secondary-color: #0c1622;
     --secondary-darker: #02080e;
     --background-color: #0c1622;
-    
+
     --secondary-glass-background: rgba(12, 22, 34, 0.65);
     --secondary-glass-border: 1px solid rgba(12, 22, 34, 0.325);
-    
+
     --glass-shadow: 0 1px 8px 0.5px rgba(0, 0, 0, 0.875);
 
     --secondary-border: #0d2b46;
@@ -150,34 +157,6 @@ body.night {
         var(--dropdown-icons-count) * (26px + 0.5rem) - 0.5rem + 0.35rem
     );
 }
-
-/* .menu-icon-wrapper {
-    position: relative;
-}
-
-.menu-icon-wrapper:before {
-    content: 'Show Menu';
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    padding: 0.25rem;
-    background-color: var(--background-color);
-    white-space: nowrap;
-    position: absolute;
-    left: 300%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    transition: 0.3s;
-    pointer-events: none;
-    opacity: 0;
-}
-
-.menu-icon-wrapper:has(+ .collapse-wrapper > .menu-icons-cont.expanded):before {
-    content: 'Hide Menu';
-}
-
-.menu-icon-wrapper:hover:before {
-    opacity: 1;
-} */
 
 /* Dropdown Styles */
 
@@ -319,7 +298,7 @@ body.night {
 
 .toggle-switch-slider::before {
     position: absolute;
-    content: "";
+    content: '';
     height: 1rem;
     width: 1rem;
     left: 0.15rem;
@@ -329,7 +308,8 @@ body.night {
     transition: 0.4s;
 }
 
-.c-label, .f-label {
+.c-label,
+.f-label {
     user-select: none;
     color: var(--secondary-darker);
     font-weight: 500;
@@ -337,12 +317,14 @@ body.night {
     transition: 0.4s;
 }
 
-.toggle-switch-label .toggle-switch-input:checked + .toggle-switch-slider::before {
+.toggle-switch-label
+    .toggle-switch-input:checked
+    + .toggle-switch-slider::before {
     transform: translateX(1.5rem);
 }
 
-.change-units-cont:has( .toggle-switch-input:not(:checked)) > .c-label,
-.change-units-cont:has( .toggle-switch-input:checked) > .f-label {
+.change-units-cont:has(.toggle-switch-input:not(:checked)) > .c-label,
+.change-units-cont:has(.toggle-switch-input:checked) > .f-label {
     color: var(--text-alt-color);
 }
 
@@ -362,16 +344,20 @@ body.night {
     pointer-events: none;
 }
 
-.change-units-cont:has( .toggle-switch-input:not(:checked)) > .toggle-switch-label:before {
+.change-units-cont:has(.toggle-switch-input:not(:checked))
+    > .toggle-switch-label:before {
     content: 'Switch To F°';
 }
 
-.change-units-cont:has( .toggle-switch-input:not(:checked)) > .toggle-switch-label:hover:before,
-.change-units-cont:has( .toggle-switch-input:checked) > .toggle-switch-label:hover:before {
+.change-units-cont:has(.toggle-switch-input:not(:checked))
+    > .toggle-switch-label:hover:before,
+.change-units-cont:has(.toggle-switch-input:checked)
+    > .toggle-switch-label:hover:before {
     opacity: 1;
 }
 
-.change-units-cont:has( .toggle-switch-input:checked) > .toggle-switch-label:before {
+.change-units-cont:has(.toggle-switch-input:checked)
+    > .toggle-switch-label:before {
     content: 'Switch To C°';
 }
 
@@ -506,8 +492,14 @@ body.night {
 }
 
 @keyframes close-modal {
-    from {transform: translateY(0rem) translate(-50%, -50%); opacity: 1}
-    to {transform: translateY(-20rem) translate(-50%, -50%); opacity: 0;}
+    from {
+        transform: translateY(0rem) translate(-50%, -50%);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-20rem) translate(-50%, -50%);
+        opacity: 0;
+    }
 }
 
 /*-----------------------------------------------------*/
@@ -547,7 +539,8 @@ body.night {
     transition: 0.3s;
 }
 
-.form-row:has(input:focus):before, .form-row:has(input:not(:placeholder-shown)):before {
+.form-row:has(input:focus):before,
+.form-row:has(input:not(:placeholder-shown)):before {
     top: 78.5%;
     left: 50%;
     opacity: 1;
@@ -557,7 +550,6 @@ body.night {
 .form-row:has(input:not(:placeholder-shown)):before {
     color: var(--accent-color);
 }
-
 
 .add-location-input {
     background-color: var(--primary-border);
@@ -689,16 +681,143 @@ body.night {
 }
 
 @keyframes scale-up {
-    from { transform: scale(0); }
-    to { transform: scale(1); }
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
 }
-
 
 /* Add Location Modal Styles */
 
 /*-----------------------------------------------------*/
 
 /* Modal Styles */
+
+/*-----------------------------------------------------*/
+
+/* Notifications Styles */
+
+.notification {
+    position: fixed;
+    left: 50%;
+    top: 1.25%;
+    width: 30ch;
+    max-width: 45ch;
+    transform: translate(-50%);
+    z-index: 2;
+
+    text-align: center;
+}
+
+.notification-fade-in {
+    animation: notification-fade-in 0.5s;
+}
+
+@keyframes notification-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.notification-fade-out {
+    animation: notification-fade-out 0.5s;
+}
+
+@keyframes notification-fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.notification-body {
+    padding: 0.5rem;
+}
+
+.notification-text {
+    font-weight: 500;
+}
+
+.progress-bar {
+    height: 0.75rem;
+    background-color: var(--text-alt-color);
+    width: 100%;
+}
+
+.drain-progress {
+    animation: drain-progress 3.5s steps(250, end) forwards;
+}
+
+@keyframes drain-progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/*-----------------------------------------------------*/
+
+/* Error Notifications Styles */
+
+.error-notification {
+    color: var(--text-alt-color);
+    background: var(--error-glass-background);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
+
+.error-notification .progress-bar {
+    background-color: #a22000;
+}
+
+/* Error Notifications Styles */
+
+/*-----------------------------------------------------*/
+
+/* Success Notifications Styles */
+
+.success-notification {
+    color: var(--text-alt-color);
+    background: var(--success-glass-background);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
+
+.success-notification .progress-bar {
+    background-color: #01791e;
+}
+
+/* Success Notifications Styles */
+
+/*-----------------------------------------------------*/
+
+/* Information Notifications Styles */
+
+.information-notification {
+    color: var(--text-alt-color);
+    background: var(--information-glass-background);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
+
+.information-notification .progress-bar {
+    background-color: #003580;
+}
+
+/* Information Notifications Styles */
+
+/*-----------------------------------------------------*/
+
+/* Notifications Styles */
 
 /*-----------------------------------------------------*/
 

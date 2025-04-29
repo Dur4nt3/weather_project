@@ -4,7 +4,6 @@ import {
     buildImgElement,
     hide,
     show,
-    clearChildren,
 } from './dom-manipulator';
 
 import xSvg from '../assets/icons/x.svg';
@@ -157,24 +156,6 @@ export function indicateError(modal) {
     const input = modal.querySelector('.add-location-input');
     input.disabled = true;
     input.classList.add('disabled-input');
-}
-
-export function indicateSuccess(modalContent, resolvedAddress) {
-    clearChildren(modalContent);
-
-    const closeIcon = buildImgElement(xSvg, 'Close Modal', 'close-modal-icon');
-
-    const cont = buildElement('div', 'success-cont');
-    const msg1 = buildElementWithText('h3', resolvedAddress, 'success-header');
-    const msg2 = buildElementWithText(
-        'h3',
-        'has been added successfully!',
-        'success-header'
-    );
-
-    cont.append(msg1, msg2);
-    cont.classList.add('scale-up');
-    modalContent.append(closeIcon, cont);
 }
 
 // Clears the query results

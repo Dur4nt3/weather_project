@@ -2,7 +2,7 @@ import { savedLocations } from './data-utilities';
 
 // Loads weatherData from the localStorage unto 'savedLocations'
 // This is used by the 'localStorage-build' module that builds data containers on page load
-// This module WILL requery if the data is outdated
+// If data is outdated the 'update-data-execute.js' module will initiate a requery and rebuild containers
 
 export default function loadStoredData() {
     const weatherData = localStorage.getItem('weatherData');
