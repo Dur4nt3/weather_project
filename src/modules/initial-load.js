@@ -2,8 +2,10 @@ import applyTheme from './change-theme';
 import applyNoDataNotice from './no-data-notice';
 import loadStoredData from './localStorage-load';
 import buildOnLoad from './localStorage-build';
+import performDataUpdates from './update-data-execute';
 
 import { addToolTips } from './add-tooltips';
+
 
 // This module gathers functions that should execute on load
 
@@ -13,4 +15,5 @@ export function initialLoad() {
     loadStoredData();
     buildOnLoad();
     applyNoDataNotice();
+    performDataUpdates();
 }

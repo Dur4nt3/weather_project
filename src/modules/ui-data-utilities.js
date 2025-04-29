@@ -2,12 +2,23 @@ import { getWeatherConditionIcon } from './conditions-icons';
 
 // This module provides utilities that allows handling and manipulating data in the UI
 
+// Class indicating what data needs to be updated on a location data container
+// 'timestamp' => true if there is a need to update local time in the container
+// 'highlight' => true if there is a need to update the highlight section in the container
+// 'requery' => true if there is a need to requery the weather data (because current data is outdated)
+export class UpdateRequirements {
+    constructor(timestamp, highlight, requery) {
+        this.timestamp = timestamp;
+        this.highlight = highlight;
+        this.requery = requery;
+    }
+}
+
 // Returns the location data container in the DOM that matches the given location
 // Utilizes the 'data-location' attribute on the container's header
 // Returns false if the container wasn't found
 export function getLocationDataCont(location) {
     const mainData = document.querySelector('.main-data');
-    console.log(mainData.children);
     const mainChildren = [...mainData.children];
     for (const child of mainChildren ) {
         if (child.classList.contains('location-data-cont')) {

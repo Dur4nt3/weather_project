@@ -9,7 +9,6 @@ const latestUpdates = {};
 export { savedLocations, latestUpdates };
 
 // Class for storing weather data
-
 export class WeatherData {
     constructor(
         location,
@@ -57,20 +56,24 @@ export function checkIfAlreadySaved(jsonData) {
 // Used to allow exceptions when fetching data for a location is already tracked
 // If the data isn't updated => return false
 export function checkIfUpdated(location) {
-    const currentDate = new Date();
-    if (!isSameDay(currentDate, savedLocations[location].date)) {
-        return false;
+    const currentDate = new Date(
+        adjustToLocalTime(savedLocations[location].tzOffset)
+    );
+    if (isSameDay(currentDate, new Date(savedLocations[location].date))) {
+        return true;
     }
-    return true;
+    return false;
 }
 
 export function updateLatestUpdates(location, tzOffset) {
-    savedLocations[location] = adjustToLocalTime(tzOffset);
+    latestUpdates[location] = adjustToLocalTime(tzOffset);
 }
 
 // Returns weather data for the highlight (i.e., the current hour)
 export function getHighlightData(weatherDataObj) {
-    let time = padTimeWithZeros(`${getHours(new Date(adjustToLocalTime(weatherDataObj.tzOffset)))}:00`);
+    let time = padTimeWithZeros(
+        `${getHours(new Date(adjustToLocalTime(weatherDataObj.tzOffset)))}:00`
+    );
     time = `${time}:00`;
 
     for (const key in weatherDataObj.hourlyTemps) {

@@ -5,6 +5,15 @@ import 'tippy.js/animations/shift-away-subtle.css'
 
 let menuTip;
 
+function createBasicToolTip(elementSelector, content) {
+    return tippy(elementSelector, {
+        content,
+        theme: 'weatherApp',
+        placement: 'right',
+        animation: 'shift-away-subtle',
+    });
+}
+
 export function toggleMenuTip() {
     if (menuTip[0].props.content === 'Hide Menu') {
         menuTip[0].setContent('Show Menu');
@@ -14,45 +23,11 @@ export function toggleMenuTip() {
 }
 
 export function addToolTips() {
-    menuTip = tippy('.dropdown-icon', {
-        content: 'Show Menu',
-        theme: 'weatherApp',
-        placement: 'right',
-        animation: 'shift-away-subtle',
-    });
+    menuTip = createBasicToolTip('.dropdown-icon', 'Show Menu');
 
-    tippy('.add-icon', {
-        content: 'Add Location',
-        theme: 'weatherApp',
-        placement: 'right',
-        animation: 'shift-away-subtle',
-    });
-
-    tippy('.edit-on-icon', {
-        content: 'Toggle Edit',
-        theme: 'weatherApp',
-        placement: 'right',
-        animation: 'shift-away-subtle',
-    });
-
-    tippy('.edit-off-icon', {
-        content: 'Toggle Edit',
-        theme: 'weatherApp',
-        placement: 'right',
-        animation: 'shift-away-subtle',
-    });
-
-    tippy('.fahrenheit-icon', {
-        content: 'To Imperial Units',
-        theme: 'weatherApp',
-        placement: 'right',
-        animation: 'shift-away-subtle',
-    });
-    
-    tippy('.celsius-icon', {
-        content: 'To Metric Units',
-        theme: 'weatherApp',
-        placement: 'right',
-        animation: 'shift-away-subtle',
-    });
+    createBasicToolTip('.add-icon', 'Add Location');
+    createBasicToolTip('.edit-on-icon', 'Toggle Edit');
+    createBasicToolTip('.edit-off-icon', 'Toggle Edit');
+    createBasicToolTip('.fahrenheit-icon', 'To Imperial Units');
+    createBasicToolTip('.celsius-icon', 'To Metric Units');
 }
