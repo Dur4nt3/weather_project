@@ -26,3 +26,31 @@ export function saveToLocalStorage(weatherDataObj) {
     const localStorageArray = appendToSavedArray(arrayItem);
     localStorage.setItem('weatherData', JSON.stringify(localStorageArray));
 }
+
+// Locates the index of a weatherData item in the localStorage given a location
+// REQUIRES the parsed localStorage array passed as parsedArray
+function locateInLocalStorage(parsedArray, location) {
+    for (const item in parsedArray) {
+        if (parsedArray[item][0] === location) {
+            return item;
+        }
+    }
+}
+
+// Deletes a given location from the localStorage
+// Indicate success/failure with true or false
+export function deleteFromLocalStorage(location) {
+    const storedData = localStorage.getItem('weatherData');
+    // If for some reason the location isn't saved to localStorage, exit.
+    if (storedData === null) {
+        return false;
+    }
+    const parsedArray = JSON.parse(storedData);
+    const itemIndex = locateInLocalStorage(parsedArray, location);
+    if (itemIndex === undefined) {
+        return false;
+    }
+    parsedArray.splice(itemIndex, 1);
+    localStorage.setItem('weatherData', JSON.stringify(parsedArray));
+    return true;
+}

@@ -11,7 +11,7 @@ function fetchAPIKey() {
 
 // Fetch the data, return true if data for the specified location was found
 // Return false if no data was found, an api error has occurred, or the location already exists
-export async function fetchWeatherData(location) {
+export async function fetchWeatherData(location, update = false) {
     let apiResult = true;
 
     try {
@@ -28,7 +28,7 @@ export async function fetchWeatherData(location) {
             // Exception: Request made to update the data of existing locations
             // The exception is indicated by the optional 'update' argument
             // update = false (default) => no exception || update - true => exception granted
-            if (checkIfAlreadySaved(jsonData)) {
+            if (checkIfAlreadySaved(jsonData) && !update) {
                 apiResult = ['duplicate', jsonData];
                 throw new Error('Location already saved');
             }

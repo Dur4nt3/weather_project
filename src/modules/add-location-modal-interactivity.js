@@ -9,6 +9,7 @@ import { fetchWeatherData } from './fetch-weather-data';
 import trackNewLocation from './track-new-location';
 import { exitModal } from './misc-utilities';
 import { addSuccessNotification } from './add-notification';
+import { checkQueryValidity } from './data-utilities';
 
 // Tracks the results of the latest query (error/success)
 let queryResult;
@@ -31,21 +32,6 @@ function stillProcessingCall(modalContent) {
     return false;
 }
 
-// Checks if the query is valid before processing it
-function checkQueryValidity() {
-    // Using try/catch for unexpected values that are both invalid and cannot be checked for properties
-    try {
-        // If the resolved address property exists the results stored are the correct data
-        if (queryResult.resolvedAddress !== undefined) {
-            return true;
-        }
-        return false;
-    } catch (error) {
-        console.error(`Invalid Query: ${error}`);
-        return false;
-    }
-}
-
 // Save/delete data depending on the user's decision
 function handleFinalDecision(modal, decision) {
     if (decision === false) {
@@ -54,7 +40,7 @@ function handleFinalDecision(modal, decision) {
     }
 
     // If the decision isn't 'No' check if the query is valid before processing
-    if (!checkQueryValidity()) {
+    if (!checkQueryValidity(queryResult)) {
         return false;
     }
 

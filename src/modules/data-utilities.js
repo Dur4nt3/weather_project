@@ -32,6 +32,17 @@ export class WeatherData {
     }
 }
 
+// Deletes a given location from 'savedLocation'
+// Indicate success/failure with true or false
+export function deleteLocation(location) {
+    if (savedLocations[location] === undefined) {
+        return false;
+    }
+
+    delete savedLocations[location];
+    return true;
+}
+
 // Checks whether there are any stored locations
 export function checkSavedLocations() {
     const locations = Object.keys(savedLocations);
@@ -80,5 +91,20 @@ export function getHighlightData(weatherDataObj) {
         if (key === time) {
             return weatherDataObj.hourlyTemps[key];
         }
+    }
+}
+
+// Checks if the return value from the fetching process is a valid response
+export function checkQueryValidity(queryResult) {
+    // Using try/catch for unexpected values that are both invalid and cannot be checked for properties
+    try {
+        // If the resolved address property exists the results stored are the correct data
+        if (queryResult.resolvedAddress !== undefined) {
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.error(`Invalid Query: ${error}`);
+        return false;
     }
 }
