@@ -5,6 +5,7 @@ import { initialLoad } from './modules/initial-load';
 import { addLocationModalInteractivity } from './modules/add-location-modal-interactivity';
 import { toggleMenuTip } from './modules/add-tooltips';
 import handleGlobalChangeUnits from './modules/global-change-units';
+import handleToggleEditMode from './modules/global-edit-mode';
 
 window.onload = initialLoad;
 
@@ -36,6 +37,16 @@ menuOptions.addEventListener('click', (e) => {
 
     if (target.classList.contains('celsius-icon')) {
         handleGlobalChangeUnits(target, false);
+        return;
+    }
+
+    if (target.classList.contains('edit-on-icon')) {
+        handleToggleEditMode(target, true);
+        return;
+    }
+
+    if (target.classList.contains('edit-off-icon')) {
+        handleToggleEditMode(target, false);
         return;
     }
 });

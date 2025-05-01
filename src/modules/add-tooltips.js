@@ -26,8 +26,8 @@ export function addToolTips() {
     menuTip = createBasicToolTip('.dropdown-icon', 'Show Menu');
 
     createBasicToolTip('.add-icon', 'Add Location');
-    createBasicToolTip('.edit-on-icon', 'Toggle Edit');
-    createBasicToolTip('.edit-off-icon', 'Toggle Edit');
+    createBasicToolTip('.edit-on-icon', 'Toggle Edit Mode');
+    createBasicToolTip('.edit-off-icon', 'Toggle Edit Mode');
     createBasicToolTip('.fahrenheit-icon', 'To Imperial Units');
     createBasicToolTip('.celsius-icon', 'To Metric Units');
 }
