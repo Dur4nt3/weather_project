@@ -18,7 +18,7 @@ export async function fetchWeatherData(location, update = false) {
         const apiKey = fetchAPIKey();
 
         const baseURL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/today`;
-        const queryParameters = `?unitGroup=metric&include=hours&key=${apiKey}&contentType=json`;
+        const queryParameters = `?unitGroup=metric&include=hours&lang=en&iconSet=icons2&key=${apiKey}&contentType=json`;
 
         const response = await fetch(baseURL + queryParameters);
         if (response.status === 200) {

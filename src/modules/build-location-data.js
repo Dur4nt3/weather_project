@@ -21,6 +21,7 @@ import {
     adjustDataContShell,
 } from './ui-data-utilities';
 import { addErrorNotification } from './add-notification';
+import viewMoreModalInteractivity from './view-more-modal-interactivity';
 
 // This module builds the markup of a location data container based on data given as an argument
 
@@ -158,6 +159,18 @@ export function changeUnitsEvent(event) {
     }
 }
 
+function viewMoreEvent(event) {
+    const { target } = event;
+    const weatherDataObj =
+        savedLocations[
+            locateLocationDataCont(target).querySelector('.location-name')
+                .dataset.location
+        ];
+
+    viewMoreModalInteractivity(weatherDataObj);
+    return;
+}
+
 export function locationDataCont(weatherDataObj) {
     const dataCont = buildElement('div', 'location-data-cont');
 
@@ -170,6 +183,7 @@ export function locationDataCont(weatherDataObj) {
         'View More Data',
         'view-more-data'
     );
+    viewMoreButton.addEventListener('click', viewMoreEvent);
     dataCont.append(viewMoreButton);
 
     // Mark the creation of the element as the first update of the data in element

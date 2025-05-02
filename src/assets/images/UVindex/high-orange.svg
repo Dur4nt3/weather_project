@@ -1,4 +1,4 @@
-<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+<svg width="32px" height="32px" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <radialGradient id="highGrad" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#FFA500"/>

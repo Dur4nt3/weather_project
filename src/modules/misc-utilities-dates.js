@@ -74,8 +74,12 @@ export function getMonthName(formattedDate) {
 
 // Take a data in a 'YYYY-MM-DDThh:mm:ss' format and converts it to a format used by the UI
 // 'Month' 'Day of the month', 'hh:mm', e.g., 'April 28, 15:30'
-export function formatDateUI(formattedDate) {
+export function formatDateUI(formattedDate, noTime = false) {
     const targetDate = new Date(formattedDate);
+
+    if (noTime) {
+        return `${getMonthName(targetDate)} ${getDate(targetDate)}`;
+    }
 
     return `${getMonthName(targetDate)} ${getDate(targetDate)}, ${formattedDate.slice(-8, -3)}`;
 }

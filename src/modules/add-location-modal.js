@@ -9,7 +9,7 @@ import {
 import xSvg from '../assets/icons/x.svg';
 import loaderSvg from '../assets/icons/loader-circle.svg';
 
-// This module build the markup for the "add location modal"
+// This module builds the markup for the "add location modal"
 // Additionally it includes various utilities that the interactivity module uses
 
 export function addLocationModal() {
