@@ -1,6 +1,6 @@
 # Weather App Project
 
-### Todo List | The Odin Project | JavaScript
+### Weather App | The Odin Project | JavaScript
 
 This is the fifth project of the "JavaScript" course within "The Odin Project".
 
