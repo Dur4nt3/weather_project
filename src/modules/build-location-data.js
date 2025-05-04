@@ -21,6 +21,7 @@ import {
     adjustDataContShell,
 } from './ui-data-utilities';
 import { addErrorNotification } from './add-notification';
+import { createBasicToolTip } from './add-tooltips';
 import viewMoreModalInteractivity from './view-more-modal-interactivity';
 
 // This module builds the markup of a location data container based on data given as an argument
@@ -32,6 +33,9 @@ function buildHeaderSection(weatherDataObj) {
         'location-name'
     );
     title.dataset.location = weatherDataObj.location;
+    if (weatherDataObj.altAddress !== null) {
+        createBasicToolTip(title, weatherDataObj.altAddress, 'bottom');
+    }
 
     const utilities = buildElement('div', 'utilities-cont');
 

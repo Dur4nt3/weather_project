@@ -6,7 +6,6 @@ import performDataUpdates from './update-data-execute';
 
 import { addToolTips } from './add-tooltips';
 
-
 // This module gathers functions that should execute on load
 
 export function initialLoad() {

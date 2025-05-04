@@ -1,15 +1,15 @@
 import tippy from 'tippy.js';
-import 'tippy.js/animations/shift-away-subtle.css'
+import 'tippy.js/animations/shift-away-subtle.css';
 
 // This module uses 'Tippy.js' to add tooltips to various elements in the DOM
 
 let menuTip;
 
-function createBasicToolTip(elementSelector, content) {
+export function createBasicToolTip(elementSelector, content, placement = 'right') {
     return tippy(elementSelector, {
         content,
         theme: 'weatherApp',
-        placement: 'right',
+        placement,
         animation: 'shift-away-subtle',
     });
 }

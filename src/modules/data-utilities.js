@@ -12,6 +12,7 @@ export { savedLocations, latestUpdates };
 export class WeatherData {
     constructor(
         location,
+        altAddress,
         date,
         tzOffset,
         hourlyTemps,
@@ -21,6 +22,7 @@ export class WeatherData {
         moonPhase
     ) {
         this.location = location;
+        this.altAddress = altAddress;
         this.date = date;
         this.tzOffset = tzOffset;
         // 'hourlyTemps' is an object where every property is a time (hh:mm:ss) and every value is the weather data for said time
@@ -98,8 +100,22 @@ export function getHighlightData(weatherDataObj) {
 export function checkQueryValidity(queryResult) {
     // Using try/catch for unexpected values that are both invalid and cannot be checked for properties
     try {
-        // If the resolved address property exists the results stored are the correct data
+        // If the resolved address property exists if the results stored are the correct data
         if (queryResult.resolvedAddress !== undefined) {
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.error(`Invalid Query: ${error}`);
+        return false;
+    }
+}
+
+export function checkGeocodeValidity(geocodeData) {
+    // Using try/catch for unexpected values that are both invalid and cannot be checked for properties
+    try {
+        // If the formatted property exists if the results stored are the correct data
+        if (geocodeData.results[0].formatted !== undefined) {
             return true;
         }
         return false;

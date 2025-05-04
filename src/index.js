@@ -26,7 +26,10 @@ menuOptions.addEventListener('click', (e) => {
     const { target } = e;
 
     if (target.classList.contains('add-icon')) {
-        addLocationModalInteractivity();
+        // Only display the modal if there isn't a modal currently being displayed
+        if (document.querySelector('.modal') === null) {
+            addLocationModalInteractivity();
+        }
         return;
     }
 

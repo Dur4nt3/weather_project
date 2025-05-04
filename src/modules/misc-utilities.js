@@ -21,6 +21,14 @@ export function apiErrors(errorCode) {
     return 'user';
 }
 
+export function checkIfAPIError(result) {
+    const errorDescriptions = ['api', 'user'];
+    if (errorDescriptions.includes(result)) {
+        return true;
+    }
+    return false;
+}
+
 // Exits a modal with a specified animation
 export function exitModal(
     modal,

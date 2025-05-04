@@ -25,6 +25,7 @@ export default function formatAndSaveWeatherData(jsonData) {
 
     const weatherDataObject = new WeatherData(
         jsonData.resolvedAddress,
+        jsonData.altAddress,
         jsonData.days[0].datetime,
         jsonData.tzoffset,
         hourlyTemps,

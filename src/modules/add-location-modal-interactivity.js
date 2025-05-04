@@ -9,10 +9,13 @@ import { fetchWeatherData } from './fetch-weather-data';
 import trackNewLocation from './track-new-location';
 import { exitModal } from './misc-utilities';
 import { addSuccessNotification } from './add-notification';
-import { checkQueryValidity } from './data-utilities';
+import { checkQueryValidity, checkGeocodeValidity } from './data-utilities';
+import fetchGeocodeLocation from './fetch-geocode-data';
+import formatGeocodeAddress from './format-geocode-data';
 
 // Tracks the results of the latest query (error/success)
 let queryResult;
+let altAddress;
 
 // Returns true if the application is still processing an API call
 // If a loader exists => an API call is still being processed
@@ -42,6 +45,12 @@ function handleFinalDecision(modal, decision) {
     // If the decision isn't 'No' check if the query is valid before processing
     if (!checkQueryValidity(queryResult)) {
         return false;
+    }
+
+    if(checkGeocodeValidity(altAddress)) {
+        queryResult.altAddress = formatGeocodeAddress(altAddress);
+    } else {
+        queryResult.altAddress = null;
     }
 
     // Show success within the modal
@@ -95,7 +104,12 @@ async function addLocationModalEvent(event) {
         }
     }
 
+    // If the location is accepted - generate an alternate address
     if (target.classList.contains('accept-location')) {
+        alterSubmitButton(modalContent.parentNode, true);
+        altAddress = await fetchGeocodeLocation(queryResult.address);
+        alterSubmitButton(modalContent.parentNode, false);
+
         if (!handleFinalDecision(modalContent.parentNode, true)) {
             indicateError(modalContent.parentNode);
             return;
